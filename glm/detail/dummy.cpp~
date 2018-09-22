@@ -1,0 +1,31 @@
+#include "camera.h"
+
+camera::camera::camera(glm::vec3 pos, double* deltatime) : position(pos), _deltatime(deltatime){}
+
+void camera::camera::move(direction MoveDirection/*, float deltatime*/){
+
+//	if(_oldtime != -1){
+//		_deltatime = *(_currenttime) - _oldtime;
+//		_oldtime = *_currenttime;
+
+		float _speed = speed * (*_deltatime);
+		switch(MoveDirection){
+		case(0) : {position += _speed * _front; break;}
+		case(1) : {position -= _speed * _front; break;}
+		case(2) : {position -= glm::normalize(glm::cross(_front, _up)) * _speed; break;}
+		case(3) : {position += glm::normalize(glm::cross(_front, _up)) * _speed; break;}
+
+		}
+//	}
+//	else{
+//		_oldtime = *_currenttime;
+//	}
+}
+
+
+glm::mat4 camera::camera::view(){
+	glm::vec3 tmp = glm::normalize(position - glm::vec3(0.0, 0.0, 0.0));
+	glm::vec3 tmp2right = glm::normalize(glm::cross(_up, tmp));
+	_up = glm::cross(tmp, tmp2right);
+	return glm::lookAt(position, position + _front, _up);
+}
