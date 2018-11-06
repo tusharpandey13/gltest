@@ -54,7 +54,7 @@ int main() {
 	{
 		texture::texture("resources/textures/container2.png", texture::texturetype::diffuse),
 		texture::texture("resources/textures/container2_specular.png", texture::texturetype::specular),
-		texture::texture("resources/textures/black.jpg", texture::texturetype::emission),
+		texture::texture("resources/textures/matrix.jpg", texture::texturetype::emission),
 
 	}
 	);
